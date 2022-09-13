@@ -7,8 +7,18 @@
 //
 
 #import "CheeryKitchen.h"
+#import "DeliveryService.h"
 
 @implementation CheeryKitchen
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self setDs:[DeliveryService new]];
+    }
+    return self;
+}
 
 -(BOOL)kitchen:(Kitchen*)kitchen shouldMakePizzaOfSize:(PizzaSize)size andToppings:(NSArray*) toppings {
     NSLog(@"Enjoy your pizza.");
@@ -18,20 +28,7 @@
     return YES;
 }
 -(void)kitchenDidMakePizza:(Pizza*)pizza {
-    NSString *toppings = [[pizza toppings] componentsJoinedByString:@" "];
-    NSString *size = @"";
-    switch ([pizza pizzaSize]) {
-        case 0:
-            size = @"S";
-            break;
-        case 1:
-            size = @"M";
-        case 2:
-            size = @"L";
-        default:
-            break;
-    }
-    NSLog(@"%@ pizza(%@ size) was made.", toppings, size);
+    [_ds deliverPizza:pizza];
 }
 
 @end

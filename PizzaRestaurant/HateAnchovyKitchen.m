@@ -7,8 +7,19 @@
 //
 
 #import "HateAnchovyKitchen.h"
+#import "Pizza.h"
+#import "DeliveryService.h"
 
 @implementation HateAnchovyKitchen
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self setDs:[DeliveryService new]];
+    }
+    return self;
+}
 
 -(BOOL)kitchen:(Kitchen *)kitchen shouldMakePizzaOfSize:(PizzaSize)size andToppings:(NSArray *)toppings {
     return ![toppings containsObject:@"anchovy"];
@@ -18,21 +29,8 @@
     return NO;
 }
 
--(void)kitchenDidMakePizza:(id)pizza {
-    NSString *toppings = [[pizza toppings] componentsJoinedByString:@" "];
-    NSString *size = @"";
-    switch ([pizza pizzaSize]) {
-        case 0:
-            size = @"S";
-            break;
-        case 1:
-            size = @"M";
-        case 2:
-            size = @"L";
-        default:
-            break;
-    }
-    NSLog(@"%@ pizza(%@ size) was made.", toppings, size);
+-(void)kitchenDidMakePizza:(Pizza*)pizza {
+    [_ds deliverPizza:pizza];
 }
 
 @end

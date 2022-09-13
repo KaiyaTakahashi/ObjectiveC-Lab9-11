@@ -21,7 +21,7 @@ int main(int argc, const char * argv[])
         Kitchen *restaurantKitchen = [Kitchen new];
         HateAnchovyKitchen *hateAnchovyKitchen = [HateAnchovyKitchen new];
         CheeryKitchen *cheeryKitchen = [CheeryKitchen new];
-        restaurantKitchen.delegate = cheeryKitchen;
+        restaurantKitchen.delegate = hateAnchovyKitchen;
         Pizza *pizaa = [Pizza new];
         [pizaa setPizzaSize:0];
         NSLog(@"%d", [pizaa pizzaSize]);
